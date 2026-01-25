@@ -3,36 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALORANT - Tactical FPS</title>
+    <title data-i18n-key="pageTitle">VALORANT - Tactical FPS</title>
     <link rel="icon" href="https://i.postimg.cc/W336jzVk/valorant-fiveicons.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/translate.css">
     <script src="js/script.js" defer></script>
-
+    <script src="js/translate.js" defer></script>
 </head>
 <body>
 
     <div class="intro-screen" id="introScreen">
-        <div class="intro-logo">VALORANT</div>
+        <div class="intro-logo" data-i18n-key="valorant">VALORANT</div>
     </div>
 
     <div class="main-content" id="mainContent">
 
         <header>
             <nav>
-                <div class="brand">VALORANT</div>
+                <div class="brand" data-i18n-key="valorant">VALORANT</div>
                 <div class="mobile-toggle" id="mobileToggle">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#agents">Agents</a></li>
-                    <li><a href="#arsenal">Arsenal</a></li>
-                    <li><a href="#maps">Maps</a></li>
-                    <li><a href="#news">News</a></li>
+                    <li><a href="#home" data-i18n-key="home">Home</a></li>
+                    <li><a href="#agents" data-i18n-key="agents">Agents</a></li>
+                    <li><a href="#arsenal" data-i18n-key="arsenal">Arsenal</a></li>
+                    <li><a href="#maps" data-i18n-key="maps">Maps</a></li>
+                    <li><a href="#news" data-i18n-key="news">News</a></li>
                 </ul>
-                <button class="nav-cta">Play Free</button>
+                <div class="language-switcher">
+                    <select id="languageSelect" class="language-select">
+                        <option value="pt">🇧🇷 PT</option>
+                        <option value="en">🇺🇸 EN</option>
+                        <option value="es">🇪🇸 ES</option>
+                    </select>
+                </div>
+                <button class="nav-cta" data-i18n-key="playFree">Play Free</button>
             </nav>
         </header>
 
@@ -40,43 +48,43 @@
             <div class="hero-bg"></div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1>VALORANT</h1>
-                <p class="hero-subtitle">Defy The Limits</p>
+                <h1 data-i18n-key="valorant">VALORANT</h1>
+                <p class="hero-subtitle" data-i18n-key="defyLimits">Defy The Limits</p>
                 <div class="hero-buttons">
-                    <a href="https://playvalorant.com/pt-br/" class="btn-primary">Play Now</a>
-                    <a href="https://www.youtube.com/watch?v=e_E9W2vsRbQ" class="btn-secondary">Watch Trailer</a>
+                    <a href="https://playvalorant.com/" class="btn-primary" data-i18n-key="playNow">Play Now</a>
+                    <a href="https://www.youtube.com/watch?v=e_E9W2vsRbQ" class="btn-secondary" data-i18n-key="watchTrailer">Watch Trailer</a>
                 </div>
             </div>
         </section>
 
         <section class="features" id="agents">
             <div class="section-header">
-                <div class="section-label">Your Agents</div>
-                <h2 class="section-title">Choose Your Character</h2>
-                <p class="section-description">
+                <div class="section-label" data-i18n-key="yourAgents">Your Agents</div>
+                <h2 class="section-title" data-i18n-key="chooseCharacter">Choose Your Character</h2>
+                <p class="section-description" data-i18n-key="agentDescription">
                     Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities.
                 </p>
             </div>
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="feature-number">01</div>
-                    <h3>Duelists</h3>
-                    <p>Self-sufficient fraggers who their team expects, through abilities and skills, to get high frags and seek out engagements first.</p>
+                    <h3 data-i18n-key="duelists">Duelists</h3>
+                    <p data-i18n-key="duelistsDesc">Self-sufficient fraggers who their team expects, through abilities and skills, to get high frags and seek out engagements first.</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-number">02</div>
-                    <h3>Controllers</h3>
-                    <p>Experts in slicing up dangerous territory to set their team up for success with vision control and area denial.</p>
+                    <h3 data-i18n-key="controllers">Controllers</h3>
+                    <p data-i18n-key="controllersDesc">Experts in slicing up dangerous territory to set their team up for success with vision control and area denial.</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-number">03</div>
-                    <h3>Initiators</h3>
-                    <p>Challenge angles by setting up their team to enter contested ground and push defenders away from key positions.</p>
+                    <h3 data-i18n-key="initiators">Initiators</h3>
+                    <p data-i18n-key="initiatorsDesc">Challenge angles by setting up their team to enter contested ground and push defenders away from key positions.</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-number">04</div>
-                    <h3>Sentinels</h3>
-                    <p>Defensive specialists who can lock down areas and watch flanks, both on attacker and defender rounds.</p>
+                    <h3 data-i18n-key="sentinels">Sentinels</h3>
+                    <p data-i18n-key="sentinelsDesc">Defensive specialists who can lock down areas and watch flanks, both on attacker and defender rounds.</p>
                 </div>
             </div>
         </section>
@@ -86,25 +94,25 @@
             <div class="showcase-container">
                 <div class="showcase-image"></div>
                 <div class="showcase-content">
-                    <h2>Tactical Precision Meets Lethal Force</h2>
-                    <p>
+                    <h2 data-i18n-key="arsenalTitle">Tactical Precision Meets Lethal Force</h2>
+                    <p data-i18n-key="arsenalDesc1">
                         Every weapon in VALORANT requires its own unique strategy and playstyle. Master the recoil patterns, understand the economy, and dominate the battlefield with perfect aim.
                     </p>
-                    <p>
+                    <p data-i18n-key="arsenalDesc2">
                         From pistols to heavy machine guns, each weapon has been meticulously designed to provide tactical depth and reward skilled players.
                     </p>
                     <div class="showcase-stats">
                         <div class="stat-item">
                             <div class="stat-number">17</div>
-                            <div class="stat-label">Weapons</div>
+                            <div class="stat-label" data-i18n-key="weapons">Weapons</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">24</div>
-                            <div class="stat-label">Agents</div>
+                            <div class="stat-label" data-i18n-key="agents">Agents</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">10</div>
-                            <div class="stat-label">Maps</div>
+                            <div class="stat-label" data-i18n-key="maps">Maps</div>
                         </div>
                     </div>
                 </div>
@@ -113,48 +121,48 @@
 
         <!-- CTA -->
         <section class="cta-section">
-            <h2>Ready To Join The Fight?</h2>
-            <p>Download VALORANT and start your competitive journey today</p>
-            <a href="#" class="btn-secondary">Get Started</a>
+            <h2 data-i18n-key="ctaTitle">Ready To Join The Fight?</h2>
+            <p data-i18n-key="ctaDesc">Download VALORANT and start your competitive journey today</p>
+            <a href="#" class="btn-secondary" data-i18n-key="getStarted">Get Started</a>
         </section>
 
         <!-- Footer -->
         <footer>
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>VALORANT</h3>
-                    <p>A 5v5 character-based tactical FPS where precise gunplay meets unique agent abilities.</p>
+                    <h3 data-i18n-key="valorant">VALORANT</h3>
+                    <p data-i18n-key="footerDesc">A 5v5 character-based tactical FPS where precise gunplay meets unique agent abilities.</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Game</h4>
+                    <h4 data-i18n-key="game">Game</h4>
                     <ul>
-                        <li><a href="#">Agents</a></li>
-                        <li><a href="#">Maps</a></li>
-                        <li><a href="#">Arsenal</a></li>
-                        <li><a href="#">Patch Notes</a></li>
+                        <li><a href="#" data-i18n-key="agents">Agents</a></li>
+                        <li><a href="#" data-i18n-key="maps">Maps</a></li>
+                        <li><a href="#" data-i18n-key="arsenal">Arsenal</a></li>
+                        <li><a href="#" data-i18n-key="patchNotes">Patch Notes</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Esports</h4>
+                    <h4 data-i18n-key="esports">Esports</h4>
                     <ul>
-                        <li><a href="#">VCT</a></li>
-                        <li><a href="#">Champions</a></li>
-                        <li><a href="#">Masters</a></li>
-                        <li><a href="#">Game Changers</a></li>
+                        <li><a href="#" data-i18n-key="vct">VCT</a></li>
+                        <li><a href="#" data-i18n-key="champions">Champions</a></li>
+                        <li><a href="#" data-i18n-key="masters">Masters</a></li>
+                        <li><a href="#" data-i18n-key="gameChangers">Game Changers</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Support</h4>
+                    <h4 data-i18n-key="support">Support</h4>
                     <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#" data-i18n-key="helpCenter">Help Center</a></li>
+                        <li><a href="#" data-i18n-key="privacyPolicy">Privacy Policy</a></li>
+                        <li><a href="#" data-i18n-key="termsOfService">Terms of Service</a></li>
+                        <li><a href="#" data-i18n-key="contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Riot Games, Inc. VALORANT and any associated logos are trademarks, service marks, and/or registered trademarks of Riot Games, Inc.</p>
+                <p data-i18n-key="copyright">&copy; 2025 Riot Games, Inc. VALORANT and any associated logos are trademarks, service marks, and/or registered trademarks of Riot Games, Inc.</p>
             </div>
         </footer>
     </div>

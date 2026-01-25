@@ -1,0 +1,50 @@
+/* Estilos para o seletor de idioma */
+.language-switcher {
+    margin-right: 15px;
+}
+
+.language-select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.language-select:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: #ff4655;
+}
+
+.language-select option {
+    background: #1a1a1a;
+    color: white;
+}
+
+/* Estilo para o seletor criado dinamicamente */
+.language-selector {
+    margin-right: 15px;
+}
+
+/* Para dispositivos móveis */
+@media (max-width: 768px) {
+    .language-switcher, .language-selector {
+        margin: 15px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .language-select {
+        width: 150px;
+        margin: 0 auto;
+    }
+}
