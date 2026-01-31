@@ -10,13 +10,11 @@ const translations = {
         news: "Notícias",
         playFree: "Jogar Grátis",
         
-        // Hero section
         valorant: "VALORANT",
         defyLimits: "Desafie os Limites",
         playNow: "Jogar Agora",
         watchTrailer: "Ver Trailer",
         
-        // Agents section
         yourAgents: "Seus Agentes",
         chooseCharacter: "Escolha Seu Personagem",
         agentDescription: "Misture seu estilo e experiência em um palco competitivo global. Você tem 13 rodadas para atacar e defender seu lado usando tiros precisos e habilidades táticas.",

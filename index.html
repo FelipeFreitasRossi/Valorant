@@ -6,7 +6,10 @@
     <title>VALORANT - Tactical FPS</title>
     <link rel="icon" href="https://i.postimg.cc/W336jzVk/valorant-fiveicons.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/translate.css">
     <script src="js/script.js" defer></script>
+    <script src="js/header.js" defer></script>
     <script src="js/translate.js" defer></script>
 </head>
 <body>
@@ -15,66 +18,10 @@
         <div class="intro-logo">VALORANT</div>
     </div>
 
+    <div id="header-container"></div>
+
     <div class="main-content" id="mainContent">
 
-        <!-- HEADER MELHORADO -->
-        <header class="site-header">
-            <div class="mobile-overlay" id="mobileOverlay"></div>
-            <nav class="navbar">
-                <div class="nav-container">
-                    <!-- Brand / Logo -->
-                    <div class="nav-brand">VALORANT</div>
-
-                    <!-- Mobile Toggle Button -->
-                    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
-                    <!-- Navigation Menu Container -->
-                    <div class="nav-menu-container" id="navMenuContainer">
-                        <ul class="nav-menu" id="navMenu">
-                            <li><a href="#home" class="nav-link">Home</a></li>
-                            <li><a href="#agents" class="nav-link">Agents</a></li>
-                            <li><a href="#arsenal" class="nav-link">Arsenal</a></li>
-                            <li><a href="#maps" class="nav-link">Maps</a></li>
-                            <li><a href="#news" class="nav-link">News</a></li>
-                            
-                            <!-- Mobile-only language selector -->
-                            <li class="mobile-language-item">
-                                <div class="language-switcher mobile">
-                                    <select id="languageSelectMobile" class="language-select">
-                                        <option value="en">🇺🇸 English</option>
-                                        <option value="pt">🇧🇷 Português</option>
-                                        <option value="es">🇪🇸 Español</option>
-                                    </select>
-                                </div>
-                            </li>
-                            
-                            <!-- Mobile-only CTA button -->
-                            <li class="mobile-cta-item">
-                                <button class="nav-cta mobile">Play Free</button>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Desktop Right Section -->
-                    <div class="nav-right">
-                        <div class="language-switcher desktop">
-                            <select id="languageSelect" class="language-select">
-                                <option value="en">🇺🇸 EN</option>
-                                <option value="pt">🇧🇷 PT</option>
-                                <option value="es">🇪🇸 ES</option>
-                            </select>
-                        </div>
-                        <button class="nav-cta desktop">Play Free</button>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Resto do seu HTML continua igual -->
         <section class="hero" id="home">
             <div class="hero-bg"></div>
             <div class="hero-overlay"></div>
@@ -194,6 +141,20 @@
             </div>
         </footer>
     </div>
+
+    <script>
+
+        fetch('html/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+                // Load header scripts
+                const headerScript = document.createElement('script');
+                headerScript.src = 'js/header.js';
+                document.body.appendChild(headerScript);
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
 
 </body>
 </html>

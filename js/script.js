@@ -1,28 +1,20 @@
-// script.js - Funcionalidades principais do site VALORANT
-
-// Sistema de animação de introdução
-document.addEventListener('DOMContentLoaded', function() {
+function initIntroAnimation() {
     const introScreen = document.getElementById('introScreen');
     const mainContent = document.getElementById('mainContent');
-
-    // Animação de introdução
+    
+    if (!introScreen || !mainContent) return;
+    
     setTimeout(() => {
-        introScreen.style.opacity = '0';
-        introScreen.style.transform = 'scale(1.1)';
+        introScreen.classList.add('fade-out');
         
         setTimeout(() => {
             introScreen.style.display = 'none';
-            mainContent.style.display = 'block';
-            
-            // Animação de entrada do conteúdo principal
-            setTimeout(() => {
-                mainContent.style.opacity = '1';
-                mainContent.style.transform = 'translateY(0)';
-            }, 50);
-        }, 500);
-    }, 2000);
+            mainContent.classList.add('visible');
+        }, 1000);
+    }, 1500);
+}
 
-    // Smooth scroll para âncoras
+function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
@@ -31,31 +23,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
+                
+                let offset = 0;
+                const header = document.querySelector('.site-header');
+                if (header) {
+                    offset = header.offsetHeight;
+                }
+                
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80,
+                    top: targetElement.offsetTop - offset,
                     behavior: 'smooth'
                 });
             }
         });
     });
+}
 
-    // Efeito de parallax no hero
+function initParallax() {
     const hero = document.querySelector('.hero');
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * 0.5;
-            hero.style.transform = `translateY(${rate}px)`;
-        });
-    }
+    if (!hero) return;
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * 0.3;
+        hero.style.transform = `translateY(${rate}px)`;
+    });
+}
 
-    // Animação dos números nas estatísticas
+function initNumberAnimation() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length === 0) return;
+    
     function animateNumbers() {
-        const statNumbers = document.querySelectorAll('.stat-number');
         statNumbers.forEach(stat => {
             const target = parseInt(stat.textContent);
             let current = 0;
-            const increment = target / 50;
+            const increment = target / 30;
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
@@ -64,141 +67,200 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     stat.textContent = Math.floor(current);
                 }
-            }, 20);
+            }, 30);
         });
     }
+    
+    return animateNumbers;
+}
 
-    // Observer para animar elementos quando entram na viewport
+function initIntersectionObserver() {
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
                 
-                // Se for a seção de estatísticas, animar os números
                 if (entry.target.classList.contains('showcase-stats')) {
-                    animateNumbers();
+                    const animateNumbers = initNumberAnimation();
+                    if (animateNumbers) animateNumbers();
                 }
             }
         });
     }, observerOptions);
-
-    // Observar elementos para animação
+    
     const animatedElements = document.querySelectorAll('.feature-item, .showcase-content, .cta-section');
     animatedElements.forEach(el => observer.observe(el));
+    
+    return observer;
+}
 
-    // Efeito de digitação no subtítulo do hero
+function initTypewriterEffect() {
     const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-        // Usar o texto atual como padrão
-        const defaultText = heroSubtitle.textContent;
-        let index = 0;
-        
-        // Limpar o texto inicial
-        heroSubtitle.textContent = '';
-        
-        function typeWriter() {
-            if (index < defaultText.length) {
-                heroSubtitle.textContent += defaultText.charAt(index);
-                index++;
-                setTimeout(typeWriter, 50);
-            }
+    if (!heroSubtitle) return;
+    
+    const text = heroSubtitle.textContent;
+    let index = 0;
+    
+    heroSubtitle.textContent = '';
+    
+    function typeWriter() {
+        if (index < text.length) {
+            heroSubtitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 50);
         }
-        
-        // Iniciar efeito de digitação
-        setTimeout(typeWriter, 500);
     }
-});
+    
+    setTimeout(typeWriter, 2000);
+}
 
-// Menu Mobile Responsivo
-function initMobileMenu() {
-    const mobileToggle = document.getElementById('mobileToggle');
-    const navMenuContainer = document.getElementById('navMenuContainer');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    
-    if (!mobileToggle || !navMenuContainer) return;
-    
-    // Toggle menu function
-    function toggleMenu() {
-        const isActive = navMenuContainer.classList.contains('active');
+function initHoverEffects() {
+    const featureItems = document.querySelectorAll('.feature-item');
+    featureItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) scale(1.02)';
+            this.style.boxShadow = '0 25px 50px rgba(255, 70, 85, 0.15)';
+        });
         
-        // Toggle classes
-        mobileToggle.classList.toggle('active');
-        navMenuContainer.classList.toggle('active');
-        mobileOverlay.classList.toggle('active');
-        
-        // Toggle aria attributes
-        mobileToggle.setAttribute('aria-expanded', !isActive);
-        
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = isActive ? '' : 'hidden';
-    }
-    
-    // Event listeners
-    mobileToggle.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking overlay
-    if (mobileOverlay) {
-        mobileOverlay.addEventListener('click', toggleMenu);
-    }
-    
-    // Close menu when clicking a nav link
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenuContainer.classList.contains('active')) {
-                toggleMenu();
-            }
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(-10px) scale(1)';
+            this.style.boxShadow = 'none';
         });
     });
     
-    // Sincronizar seletores de idioma se existirem
-    const languageSelect = document.getElementById('languageSelect');
-    const languageSelectMobile = document.getElementById('languageSelectMobile');
-    
-    if (languageSelect && languageSelectMobile) {
-        // Atualizar mobile quando desktop mudar
-        languageSelect.addEventListener('change', (e) => {
-            languageSelectMobile.value = e.target.value;
+    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
         });
         
-        // Atualizar desktop quando mobile mudar
-        languageSelectMobile.addEventListener('change', (e) => {
-            languageSelect.value = e.target.value;
-            // Disparar evento change no seletor desktop
-            if (languageSelect.dispatchEvent) {
-                languageSelect.dispatchEvent(new Event('change'));
-            }
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
         });
-        
-        // Sincronizar valores iniciais
-        languageSelectMobile.value = languageSelect.value;
-    }
-    
-    // Fechar menu ao pressionar ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenuContainer.classList.contains('active')) {
-            toggleMenu();
-        }
     });
     
-    // Ajustar menu em redimensionamento
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            if (window.innerWidth > 768 && navMenuContainer.classList.contains('active')) {
-                toggleMenu();
-            }
-        }, 250);
+    const statItems = document.querySelectorAll('.stat-item');
+    statItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
     });
 }
 
-// Inicializar quando o DOM estiver carregado
+function initLazyLoad() {
+    const images = document.querySelectorAll('img[data-src]');
+    if (images.length === 0) return;
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+function initScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    progressBar.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: #ff4655;
+        z-index: 9998;
+        transition: width 0.1s;
+    `;
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+}
+
+function initMainScripts() {
+    initIntroAnimation();
+    initSmoothScroll();
+    initParallax();
+    initIntersectionObserver();
+    initTypewriterEffect();
+    initHoverEffects();
+    initLazyLoad();
+    initScrollProgress();
+    
+    window.addEventListener('scroll', () => {
+    });
+}
+
+function handleErrors() {
+    window.addEventListener('error', (e) => {
+        console.error('Script error:', e.message, 'at', e.filename, 'line', e.lineno);
+    });
+    
+    window.addEventListener('unhandledrejection', (e) => {
+        console.error('Unhandled promise rejection:', e.reason);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    initMobileMenu();
+    handleErrors();
+    
+    try {
+        initMainScripts();
+        console.log('Main scripts initialized successfully');
+    } catch (error) {
+        console.error('Error initializing main scripts:', error);
+    }
 });
+
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    const loader = document.querySelector('.loader');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+});
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        console.log('Window resized to:', window.innerWidth, 'x', window.innerHeight);
+    }, 250);
+});
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        initIntroAnimation,
+        initSmoothScroll,
+        initParallax,
+        initIntersectionObserver,
+        initTypewriterEffect,
+        initHoverEffects,
+        initLazyLoad,
+        initScrollProgress,
+        initMainScripts
+    };
+}
