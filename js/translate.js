@@ -54,11 +54,7 @@ const translations = {
         privacyPolicy: "Política de Privacidade",
         termsOfService: "Termos de Serviço",
         contact: "Contato",
-        
-        // Selector de idioma
-        portuguese: "Português",
-        english: "Inglês",
-        spanish: "Espanhol",
+        copyright: "&copy; 2025 Riot Games, Inc. VALORANT e quaisquer logotipos associados são marcas comerciais, marcas de serviço e/ou marcas registradas da Riot Games, Inc.",
         
         // Título da página
         pageTitle: "VALORANT - FPS Tático"
@@ -105,9 +101,6 @@ const translations = {
         privacyPolicy: "Privacy Policy",
         termsOfService: "Terms of Service",
         contact: "Contact",
-        portuguese: "Portuguese",
-        english: "English",
-        spanish: "Spanish",
         pageTitle: "VALORANT - Tactical FPS"
     },
     es: {
@@ -152,9 +145,6 @@ const translations = {
         privacyPolicy: "Política de Privacidad",
         termsOfService: "Términos de Servicio",
         contact: "Contacto",
-        portuguese: "Portugués",
-        english: "Inglés",
-        spanish: "Español",
         pageTitle: "VALORANT - FPS Táctico"
     }
 };
@@ -208,41 +198,16 @@ class Translator {
             languageSelect.addEventListener('change', (e) => {
                 this.changeLanguage(e.target.value);
             });
-        } else {
-            // Se não houver seletor, cria um dinamicamente
-            this.createLanguageSelector();
-        }
-    }
-    
-    // Cria um seletor de idioma dinamicamente
-    createLanguageSelector() {
-        const nav = document.querySelector('nav');
-        if (!nav) return;
-        
-        const languageSelector = document.createElement('div');
-        languageSelector.className = 'language-selector';
-        languageSelector.innerHTML = `
-            <select id="languageSelect" class="language-select">
-                <option value="pt">🇧🇷 PT</option>
-                <option value="en">🇺🇸 EN</option>
-                <option value="es">🇪🇸 ES</option>
-            </select>
-        `;
-        
-        // Insere antes do botão CTA
-        const ctaButton = nav.querySelector('.nav-cta');
-        if (ctaButton) {
-            nav.insertBefore(languageSelector, ctaButton);
-        } else {
-            nav.appendChild(languageSelector);
         }
         
-        // Configura o event listener
-        const select = languageSelector.querySelector('select');
-        select.value = this.currentLang;
-        select.addEventListener('change', (e) => {
-            this.changeLanguage(e.target.value);
-        });
+        // Configurar também o seletor mobile se existir
+        const languageSelectMobile = document.getElementById('languageSelectMobile');
+        if (languageSelectMobile) {
+            languageSelectMobile.value = this.currentLang;
+            languageSelectMobile.addEventListener('change', (e) => {
+                this.changeLanguage(e.target.value);
+            });
+        }
     }
     
     // Muda o idioma
@@ -264,8 +229,8 @@ class Translator {
         // Aplica as traduções
         this.applyTranslations();
         
-        // Atualiza o seletor
-        this.updateLanguageSelector();
+        // Atualiza os seletores
+        this.updateLanguageSelectors();
         
         // Dispara um evento customizado
         this.dispatchLanguageChangeEvent();
@@ -321,11 +286,17 @@ class Translator {
         }
     }
     
-    // Atualiza o seletor de idioma
-    updateLanguageSelector() {
+    // Atualiza os seletores de idioma
+    updateLanguageSelectors() {
         const languageSelect = document.getElementById('languageSelect');
+        const languageSelectMobile = document.getElementById('languageSelectMobile');
+        
         if (languageSelect) {
             languageSelect.value = this.currentLang;
+        }
+        
+        if (languageSelectMobile) {
+            languageSelectMobile.value = this.currentLang;
         }
     }
     
@@ -337,7 +308,7 @@ class Translator {
         document.dispatchEvent(event);
     }
     
-    // Método para obter uma tradução específica (útil para JavaScript dinâmico)
+    // Método para obter uma tradução específica
     translate(key) {
         return translations[this.currentLang][key] || key;
     }
@@ -356,9 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adiciona um event listener para o evento de mudança de idioma
     document.addEventListener('languageChanged', (e) => {
         console.log(`Idioma alterado para: ${e.detail.language}`);
-        
         // Aqui você pode adicionar outras ações que devem ocorrer quando o idioma muda
-        // Por exemplo, recarregar dados específicos do idioma
     });
 });
 
@@ -377,7 +346,7 @@ function changeLanguage(lang) {
     }
 }
 
-// Exporta as funções para uso global (se necessário)
+// Exporta as funções para uso global
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { Translator, t, changeLanguage };
 }
